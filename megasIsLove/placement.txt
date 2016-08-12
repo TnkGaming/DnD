@@ -1,0 +1,7 @@
+document.onclick=function(e){
+console.log(e.clientX+' '+e.clientY+'\n');}
+str		30px 58 237
+strmod 	13px 69 263
+dex		30px 58 333
+dexmod 	13px 69 360
+con		30px 58 429
