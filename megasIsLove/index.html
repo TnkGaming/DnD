@@ -1,1 +1,148 @@
-kaltsa
+<html>
+<script src='statCalc.js'></script>
+<body>
+<img id="bgimg" src="dndBG.png" alt="The BG" width="860" height="1060" style="display: none;">
+<canvas id="myCanvas" width="820" height="1060" style="border:1px solid #c3c3c3;">
+</canvas>
+<script>
+document.onclick=function(e){
+console.log(e.clientX+' '+e.clientY+'\n');}
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	var img = document.getElementById('bgimg');
+	img.onload = function() {
+		ctx.drawImage(img, 0, 0);
+	};
+	while(!done)console.log(done);
+	var interval=setInterval(paint,1000);
+	
+	function paint(){
+	ctx.textAlign="center";
+	var xS=75;
+	var yS=237;
+	var xm=76;
+	var ym=263;
+	for(var i=0;i<6;i++){
+		var att=0;
+		var modatt=0;
+		switch(i){
+			case 0:att=str;modatt=mod(str);break;
+			case 1:att=dex;modatt=mod(dex);break;
+			case 2:att=con;modatt=mod(con);break;
+			case 3:att=intel;modatt=mod(intel);break;
+			case 4:att=wis;modatt=mod(wis);break;
+			case 5:att=charisma;modatt=mod(charisma);break;
+		}
+		if(att<10)att='0'+att;
+		if(modatt>=0)modatt='+'+modatt;
+		ctx.font = "30px Arial";
+		ctx.fillText(att,xS,yS);
+		ctx.font = "13px Arial";
+		ctx.fillText(modatt,xm,ym);
+		yS+=95.5;ym+=95.5;
+	}
+	ctx.font = "30px Arial";
+	ctx.fillText("+2",147,247);
+	if(ac<10)ac='0'+ac;
+	ctx.fillText(ac,330,216);
+	var md=mod(dex);
+	if(md>=0)md='+'+md;
+	ctx.fillText(md,407,216);
+	ctx.fillText(speed,484,216);
+	ctx.font = "18px Arial";
+	ctx.fillText(race,430,117);
+	ctx.fillText(allignment,540,117);
+	ctx.fillText(clss+' 1',430,84);
+	ctx.fillText(hp,420,276);
+	ctx.font = "13px Arial";
+	xm=161;
+	ym=287;
+	for(var i=0;i<6;i++){
+		var modatt=0;
+		switch(i){
+			case 0:modatt=mod(str);break;
+			case 1:modatt=mod(dex);break;
+			case 2:modatt=mod(con);break;
+			case 3:modatt=mod(intel);break;
+			case 4:modatt=mod(wis);break;
+			case 5:modatt=mod(charisma);break;
+		}
+		if(modatt>=0)modatt='+'+modatt;
+		ctx.fillText(modatt,xm,ym);
+		ym+=18;
+	}
+	ym=441;
+	for(var i=0;i<18;i++){
+		var modatt=0;
+		switch(i){
+			case 0:;
+			case 15:;
+			case 16:modatt=mod(dex);break;
+			case 1:;
+			case 6:;
+			case 9:;
+			case 11:;
+			case 17:modatt=mod(wis);break;
+			case 2:;
+			case 5:;
+			case 10:;
+			case 14:modatt=mod(intel);break;
+			case 3:modatt=mod(str);break;
+			case 4:;
+			case 7:;
+			case 12:;
+			case 13:modatt=mod(charisma);break;
+		}
+		if(modatt>=0)modatt='+'+modatt;
+		ctx.fillText(modatt,xm,ym);
+		ym+=18;
+	}
+	
+	xF=660;
+	yF=541;
+	getFeats=feats.split('\n');
+	ctx.font='18px Arial';
+	for(var i=0;i<getFeats.length;i++){
+		ctx.fillText(getFeats[i],xF,yF);
+		yF+=20;
+	}
+	ctx.font='50px Arial';
+	for(var i=0;i<savingThrows.length;i++){
+		if(savingThrows[i])
+			ctx.fillText('.',140,285+(i*18));
+	}
+	for(var i=0;i<skills.length;i++){
+		if(skills[i])
+			ctx.fillText('.',140,439+(i*18));
+	}
+	ctx.font='10px Arial';
+	xP=159;
+	yP=848;
+	getProf=proficiencies.split('\n');
+	getLangs=languages.split('\n');
+	for(var i=0;i<getProf.length;i++){
+		ctx.fillText(getProf[i],xP,yP);
+		yP+=11;	
+	}
+	var Langs=[]
+	for(var i=0;i<getLangs.length;i++){
+		if(!Langs[getLangs[i]]){
+			Langs[getLangs[i]]=1;
+			ctx.fillText(getLangs[i],xP,yP);
+			yP+=11;
+		}
+			
+	}
+	
+	clearInterval(interval);}
+</script>
+<button id='btn'>Reload</button>
+<script>
+	function reload(){
+	location.reload();
+	}
+	document.getElementById('btn').addEventListener('click',reload);
+</script>
+</body>
+
+</html>
