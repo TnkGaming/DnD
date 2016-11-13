@@ -1011,7 +1011,7 @@ function fixStats(){
 }
 
 function mod(stat){
-	return parseInt((stat-10)/2);
+	return Math.floor((stat-10)/2);
 }
 
 function print(){
